@@ -212,7 +212,7 @@ export default function Page(){
  
 ## Vantevo Analytics Guide
  
-To see all the features and settings of Vantevo Analytics we recommend that you read our complete guide [here](https://vantevo.io/docs?utm_source=npm&utm_medium=vantevo-analytics-tracker).
+To see all the features and settings of Vantevo Analytics we recommend that you read our complete guide [here](https://vantevo.io/docs).
  
 
 
