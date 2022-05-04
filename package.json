@@ -1,0 +1,52 @@
+{
+  "name": "vantevo-analytics-react",
+  "version": "1.0.0-beta.1",
+  "description": "Official react script for Vantevo Analytics.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "rollup": "rm -rf ./dist && rollup -c rollup.config.js"
+  },
+  "author": "Vantevo Analytics",
+  "license": "MIT",
+  "repository": "https://github.com/vantevo-analytics/vantevo-analytics-react",
+  "keywords": [
+    "react",
+    "next.js",
+    "nextjs",
+    "vantevo",
+    "vantevo analytics",
+    "analytics"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-typescript": "^8.3.0",
+    "@types/node": "^17.0.18",
+    "@types/react": "^17.0.39",
+    "rollup": "^2.67.3",
+    "rollup-plugin-dts": "^4.1.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-uglify": "^6.0.4",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.5"
+  },
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "vantevo-analytics-tracker": "^1.0.1-beta.10"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "peerDependencies": {
+    "react": "^16.8.6"
+  }
+}
