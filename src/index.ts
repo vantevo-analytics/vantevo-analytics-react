@@ -60,7 +60,7 @@ export default function VantevoProvider({ options, children }: IProps) {
         cleanTracker();
       }
       if (clearTrackFiles) {
-        enableTrackFiles();
+        clearTrackFiles();
       }
       if (cleanOutboundLinks) {
         cleanOutboundLinks();
