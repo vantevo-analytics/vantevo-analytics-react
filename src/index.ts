@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import VantevoAnalytics, { VantevoEvent } from 'vantevo-analytics-tracker';
+import VantevoAnalytics, { VantevoEvent, VantevoEcommerce } from 'vantevo-analytics-tracker';
 
 
 export type ParamsContext = {
@@ -16,6 +16,8 @@ export type VantevoOptions = {
   "hash"?: boolean;
   "domain"?: string;
   "params"?: ParamsContext;
+  "api_url"?: string;
+  "api_url_ecommerce"?: string;
 };
 
 type IProps = {
@@ -34,7 +36,9 @@ var defaultOptions: VantevoOptions = {
   "saveExtesionFiles": false,
   "hash": false,
   "domain": null,
-  "params": {}
+  "params": {},
+  "api_url": "https://api.vantevo.io/event",
+  "api_url_ecommerce": "https://api.vantevo.io/event-ecommerce"
 };
 
 export default function VantevoProvider({ options, children }: IProps) {
@@ -72,13 +76,19 @@ export default function VantevoProvider({ options, children }: IProps) {
 };
 
 export function useVantevo() {
-  const { vantevo: sendEvent, enableOutboundLinks, enableTrackFiles } = VantevoAnalytics(initOptions);
+  const { vantevo: sendEvent, trackEcommerce: sendEventEcommerce, enableOutboundLinks, enableTrackFiles } = VantevoAnalytics(initOptions);
+
   const vantevo: VantevoEvent = (event, meta, callback) => {
     return sendEvent(event, meta, callback);
   }
-  
+
+  const trackEcommerce: VantevoEcommerce = (event, values, callback) => {
+    return sendEventEcommerce(event, values, callback);
+  }
+
   return {
     vantevo,
+    trackEcommerce,
     enableOutboundLinks,
     enableTrackFiles
   };

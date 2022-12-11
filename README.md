@@ -31,18 +31,18 @@ export default function App() {
 These are the parameters available for the tracker settings, all fields are optional.
  
  
-| Option         | Type      | Description                                                                                                                                                   | Default |
-| -------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| excludePath    | `array`   | You can exclude one or more pages, see [settings](https://vantevo.io/docs) | `[]`    |
-| dev            | `boolean` | The tracker will not send the data, please check your browser console for more information.                                                             | `false` |
-| manualPageview | `boolean` | Allows you to track page views automatically, the script uses the `popstate` event to navigate the site. | `false` |
-| outboundLinks   | `boolean` | Allows you to monitor all outbound links from your site automatically, the script uses the `click` and` auxclick` events.                           | `false` |
-| hash           | `bool`    | Allows tracking based on URL hash changes. | `false` |
-| domain         | `boolean` | Use this option when the script is installed on a different domain than the one on Vantevo Analytics. To use this function remember to authorize the domain to be able to save the statistics, for more information [read more](https://vantevo.io/docs/domain-settings/information#authorized-domains). | `null`  |
-| trackFiles  | `string` | Is a list of extensions, separated by commas, example: zip,mp4,avi,mp3. Whenever a user clicks on a link, the script checks if the file extension is in the list you entered in the parameter and sends a `File Download` event with the value `url`.| `null`  |
-| saveExtesionFiles  | `boolean` | Allows you to save in the event detail together with the` url` also the name of the file extension as `meta_key` to get more information and statistics about your files to download. | `false`  |
-
-
+| Option                  | Type                        | Description                                                                                                                                                   | Default |
+| ----------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| excludePath             | `array`                     | You can exclude one or more pages, see [settings](https://vantevo.io/docs) | `[]`    |
+| dev                     | `boolean`                   | The tracker will not send the data, please check your browser console for more information.                                                             | `false` |
+| manualPageview          | `boolean`                   | Allows you to track page views automatically, the script uses the `popstate` event to navigate the site. | `false` |
+| outboundLinks           | `boolean`                   | Allows you to monitor all outbound links from your site automatically, the script uses the `click` and` auxclick` events.                           | `false` |
+| hash                    | `bool`                      | Allows tracking based on URL hash changes. | `false` |
+| domain                  | `boolean`                   | Use this option when the script is installed on a different domain than the one on Vantevo Analytics. To use this function remember to authorize the domain to be able to save the statistics, for more information [read more](https://vantevo.io/docs/domain-settings/information#authorized-domains). | `null`  |
+| trackFiles              | `string`                    | Is a list of extensions, separated by commas, example: zip,mp4,avi,mp3. Whenever a user clicks on a link, the script checks if the file extension is in the list you entered in the parameter and sends a `File Download` event with the value `url`.| `null`  |
+| saveExtesionFiles       | `boolean`                   | Allows you to save in the event detail together with the` url` also the name of the file extension as `meta_key` to get more information and statistics about your files to download. | `false`  |
+| proxyServer             | `string` (Optional)         | If you want to use a proxy server for requests sent to Vantevo.  | `https://api.vantevo.io/event`  |
+| proxyServerEcommerce    | `string` (Optional)         | If you want to use a proxy server for requests sent to Vantevo for ecommerce events. | `https://api.vantevo.io/event-ecommerce`  |
  
  
  
@@ -143,6 +143,82 @@ export default function Page(){
 | meta | `object` (Optional) | An object with custom properties for events. | `{}` |
 | callback | `function` (Optional) | A function that is called once the event has been successfully logged. | `null` |
  
+
+## Monitoring Ecommerce
+
+In the ecommerce section of Vantevo you can monitor specific actions affecting your ecommerce website and the sources of traffic that lead to sales. 
+
+
+### Parameters
+
+| Option         | Type                  | Description                                                                              | Default                  |
+| -------------- | --------------------- | ---------------------------------------------------------------------------------------- | ------------------------ |
+| event          | `string` (required)   | Event Name. See below the list of events you can use for monitoring your ecommerce.      | `pageview`               |
+| values         | `object` (required)   | An object with custom properties for events.                                             | `{}`                     |
+| callback       | `function` (optional) | A function that is called once the event has been successfully logged.                   | `null`                   |
+
+
+### List events 
+
+These are the events to use to monitor your ecommerce:
+
+| Event              | Description                                          |
+| :----------------- | :--------------------------------------------------- |
+| `add_to_wishlist`  | a user adds a product to the favorites list          |
+| `view_item`        | a user views a product                               |
+| `remove_item_cart` | a user removes a product from the cart               |
+| `add_item_cart`    | a user adds product to the cart                      |
+| `start_checkout`   | a user has started the checkout process              |
+| `checkout_info`    | a user submits personal data                         |
+| `checkout_ship`    | a user submits shipments data                        |
+| `checkout_payment` | a user initiated the payment process                 |
+| `purchase`         | a user has completed a purchase                      |
+
+
+### Example
+
+An example for how to use the `trackEcommerce` function. 
+
+```ts
+import useVantevo from "vantevo-analytics-react";
+
+export default function Page(){
+   const { trackEcommerce } = useVantevo();
+ 
+   useEffect(() => {
+        trackEcommerce("view_item", { 
+            "items": [
+                {
+                    'item_id': "SKU_123",
+                    'item_name': "Samsung Galaxy",
+                    'currency': "EUR",
+                    'quantity': 0,
+                    'price': 199.99,
+                    'discount': 0,
+                    'position': 1,
+                    'brand': "Samsung",
+                    'category_1': "Smartphone",
+                    'category_2': "Samsung",
+                    'category_3': "Galaxy",
+                    'category_4': "",
+                    'category_5': "",
+                    'variant_1': "Black",
+                    'variant_2': "5.5 inch",
+                    'variant_3': ""
+                }
+            ]
+        });
+   },[]);
+ 
+   return (...);
+}
+
+```
+
+
+Read our [guide](https://vantevo.io/docs/ecommerce/index/?utm_source=npm&utm_medium=vantevo-analytics-tracker) for more information of how to use the ecommerce tracking function.
+
+
  
 ## Tracking Files Download
 

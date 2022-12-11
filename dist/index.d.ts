@@ -1,5 +1,5 @@
 import React from 'react';
-import { VantevoEvent } from 'vantevo-analytics-tracker';
+import { VantevoEvent, VantevoEcommerce } from 'vantevo-analytics-tracker';
 
 declare type ParamsContext = {
     [key: string]: string;
@@ -14,6 +14,8 @@ declare type VantevoOptions = {
     "hash"?: boolean;
     "domain"?: string;
     "params"?: ParamsContext;
+    "api_url"?: string;
+    "api_url_ecommerce"?: string;
 };
 declare type IProps = {
     "options": VantevoOptions;
@@ -22,8 +24,9 @@ declare type IProps = {
 declare function VantevoProvider({ options, children }: IProps): React.ReactNode;
 declare function useVantevo(): {
     vantevo: VantevoEvent;
+    trackEcommerce: VantevoEcommerce;
     enableOutboundLinks: () => () => void;
-    enableTrackFiles: (extensions?: string, saveExtension?: boolean) => () => void;
+    enableTrackFiles: (extensions: string, saveExtension?: boolean) => () => void;
 };
 
 export { ParamsContext, VantevoOptions, VantevoProvider as default, useVantevo };

@@ -1,6 +1,6 @@
 {
   "name": "vantevo-analytics-react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Official react script for Vantevo Analytics.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -41,7 +41,7 @@
   ],
   "types": "dist/index.d.ts",
   "dependencies": {
-    "vantevo-analytics-tracker": "^1.0.2"
+    "vantevo-analytics-tracker": "^1.0.3"
   },
   "engines": {
     "node": ">=10"
